@@ -1,4 +1,4 @@
-<li id="micropost-<%= micropost.id %>">
+<li id="micropost-<%= micropost.id %>" class="lst-item">
   <%= link_to gravatar_for(micropost.user, size: 50), micropost.user %>
   <span class="user"><%= link_to micropost.user.name, micropost.user %></span>
   <span class="content">
@@ -11,8 +11,43 @@
       <%= link_to "delete", micropost, method: :delete,
         data: { confirm: "You sure?" } %>
     <% end %>
-    <a href="javascript:;">
+    <a href="javascript:;" class="text-success">
       <i class="fa fa-comments-o" aria-hidden="true"></i>
     </a>
   </span>
+  <div class="comment-item">
+    <ul>
+      <% @entry.comment(micropost.id).each do |comment| %>
+        <li class="item comment-<%= comment.id %>">
+        <%= gravatar_for comment.user %>
+          <div class="item-right">
+            <p><%= comment.content %></p>
+            <p class="date">
+              <%= comment.user.name %>
+              <%= comment.updated_at.strftime("%d/%m/%Y %I:%M %p") %>
+              <% if logged_in? && comment.user.id == current_user.id %>
+              <%= link_to "delete", "javascript:;", class: "delete-item",
+                data: { post: micropost.id, id: comment.id } %>
+              <% end %>
+            </p>
+          </div>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+  <% if logged_in? %>
+    <%= form_for(:comment, url: "/comments",
+      html: {class: "frm-comment"} ) do |f| %>
+      <p>
+        <span class="col-md-11">
+          <%= f.hidden_field :micropost_id, value: micropost.id %>
+          <%= f.hidden_field :user_id, value: current_user.id %>
+          <%= f.text_field :content, placeholder: t("comment"),
+            required: "required", class: "form-control" %>
+        </span>
+        <%= f.submit "Send", class: "btn btn-primary col-md-1 btn-comment" %>
+        <div class="clearfix"></div>
+      </p>
+    <% end %>
+  <% end %>
 </li>

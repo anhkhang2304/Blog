@@ -1,7 +1,6 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
-@import "font-awesome-sprockets";
-@import "font-awesome";
+
 
 body {
   padding-top: 87px;
@@ -168,6 +167,7 @@ input {
   list-style: none;
   padding: 0;
   li {
+    text-align: left;
     padding: 10px 0;
     border-top: 1px solid #e8e8e8;
   }
@@ -206,5 +206,30 @@ span.picture {
   margin-top: 10px;
   input {
     border: 0;
+  }
+}
+
+.lst-item {
+  .comment-item{
+    .item{
+      list-style: none;
+      padding: 5px 0;
+      img {
+        width: 5%;
+        display: inline-block;
+        vertical-align: top;
+      }
+      .item-right {
+        display: inline-block;
+        p {
+          margin-bottom: 5px;
+        }
+        p.date {
+          margin:0;
+          font:normal 11px Arial;
+          color:#666
+        }
+      }
+    }
   }
 }

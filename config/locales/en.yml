@@ -20,6 +20,7 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
+  comment: Comment...
   entries: Entries
   inputentry: Compose new entry...
   micropostfeed: Entries

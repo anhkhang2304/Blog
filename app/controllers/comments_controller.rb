@@ -1,20 +1,25 @@
 class CommentsController < ApplicationController
 
   def create
-    @user = User.find params[:followed_id]
-    current_user.follow @user
-    respond_to do |format|
-      format.html { redirect_to @user }
-      format.js
+    @comment = Comment.new comment_params
+    if @comment.save
+      #respond_to do |format|
+        #format.html { redirect_to @comment }
+        #format.js
+        redirect_to root_url
+      #end
     end
   end
 
   def destroy
-    @user = Relationship.find(params[:id]).followed
-    current_user.unfollow @user
-    respond_to do |format|
-      format.html { redirect_to @user }
-      format.js
-    end
+    comment = Comment.find_by(id: params[:id])
+    comment.destroy
   end
+
+
+  private
+    def comment_params
+      params.require(:comment).permit :content, :micropost_id, :user_id
+    end
+
 end

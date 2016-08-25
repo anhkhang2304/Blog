@@ -1,10 +1,10 @@
 source "https://rubygems.org"
 
-gem "font-awesome-sass", "4.6.2"
 gem "rails",        "5.0.0"
 gem "bcrypt",       "3.1.11"
 gem "faker",        "1.6.3"
 gem "puma",         "3.4.0"
+gem "font-awesome-sass", "4.6.2"
 gem "carrierwave",  "0.11.2"
 gem "mini_magick",  "4.5.1"
 gem "fog",          "1.38.0"
@@ -39,5 +39,6 @@ end
 
 group :production do
   gem "pg", "0.18.4"
+  gem "rails_12factor", "0.0.2"
 end
 

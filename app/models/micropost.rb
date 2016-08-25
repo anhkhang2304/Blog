@@ -8,7 +8,7 @@ class Micropost < ApplicationRecord
   validate  :picture_size
 
   def comment id
-    Comment.where(id: id)
+    Comment.where(micropost_id: id).order(updated_at: :desc)
   end
 
   private
